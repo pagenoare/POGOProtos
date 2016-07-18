@@ -59,10 +59,14 @@ def compile(lang, out_path):
             call(command, shell=True)
 
     if lang == "python":
-        open("{}/__init__.py".format(out_path), "a").close()
+        f = open("{}/__init__.py".format(out_path), "w")
+        f.write('import sys, os; sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))')
+        f.close()
         for root, dirnames, filenames in os.walk(out_path):
             for dirname in dirnames:
-                open("{}/__init__.py".format(os.path.join(root, dirname)), "a").close()
+                f = open("{}/__init__.py".format(os.path.join(root, dirname)), "a")
+                f.write('import sys, os; sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))')
+                f.close()
 
     print("Done!")
 
