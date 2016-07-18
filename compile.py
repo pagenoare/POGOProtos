@@ -56,4 +56,10 @@ for root, dirnames, filenames in os.walk(proto_path):
 
         call(command, shell=True)
 
+if lang == "python":
+    open("{}/__init__.py".format(out_path), "a").close()
+    for root, dirnames, filenames in os.walk(out_path):
+        for dirname in dirnames:
+            open("{}/__init__.py".format(os.path.join(root, dirname)), "a").close()
+
 print("Done!")
