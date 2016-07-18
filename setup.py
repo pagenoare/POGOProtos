@@ -1,8 +1,12 @@
+import os
+
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
 from compile import compile
 
+
+here = os.path.abspath(os.path.dirname(__file__))
 requires = [
     'protobuf==3.0.0b3',
 ]
@@ -11,7 +15,7 @@ requires = [
 class BuildProto(install):
 
     def run(self):
-        compile('python', 'pokemongoproto')
+        compile('python', os.path.join(here, 'pokemongoproto'))
         install.run(self)
 
 
